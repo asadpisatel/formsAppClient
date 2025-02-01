@@ -1,9 +1,11 @@
-import { Button } from "@/components/ui/button";
+import React from "react";
 
-export default function Home() {
-  return (
-    <div className="">
-      Home <Button>Click</Button>
-    </div>
-  );
+interface Props {
+  className?: string;
 }
+
+const Page: React.FC<Props> = ({ className }) => {
+  return <div className={className}>Home</div>;
+};
+
+export default Page;
