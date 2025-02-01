@@ -1,11 +1,7 @@
 import React from "react";
 
-interface Props {
-  className?: string;
-}
-
-const Page: React.FC<Props> = ({ className }) => {
-  return <div className={className}>Admin Panel</div>;
+const Page = () => {
+  return <div className="">Admin Panel</div>;
 };
 
 export default Page;
