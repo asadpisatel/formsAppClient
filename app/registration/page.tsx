@@ -60,7 +60,7 @@ const Page = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 min-h-screen p-4">
-      <h2 className="text-3xl">Sign up</h2>
+      <h2 className="text-3xl">Create account</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -117,7 +117,7 @@ const Page = () => {
         </form>
       </Form>
       <p>
-        Already have an account?{" "}
+        Already have an account?
         <Link href="/login" className="text-blue-700 underline">
           Sign in
         </Link>
