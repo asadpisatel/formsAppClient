@@ -14,6 +14,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import axios from "../../utils/axiosInstance";
+import { AxiosError } from "axios";
 
 const minPassLen = 2;
 
@@ -35,14 +37,19 @@ const Page = () => {
 
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      console.log(values);
+      await axios.post("/user/login", values);
+      window.location.href = "/";
     } catch (error) {
-      form.setError("password", {
-        message: "The password is wrong",
-      });
-      console.log(error);
+      if ((error as AxiosError).status === 401) {
+        form.setError("email", {
+          message: "Email not registered",
+        });
+      }
+      if ((error as AxiosError).status === 403) {
+        form.setError("password", {
+          message: "The password is wrong",
+        });
+      }
     }
   }
 
@@ -93,7 +100,7 @@ const Page = () => {
         </form>
       </Form>
       <p>
-        Don&apos;t have an account?
+        Don&apos;t have an account?{" "}
         <Link href="/registration" className="text-blue-700 underline">
           Sign up
         </Link>

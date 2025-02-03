@@ -120,7 +120,7 @@ const Page = () => {
         </form>
       </Form>
       <p>
-        Already have an account?
+        Already have an account?{" "}
         <Link href="/login" className="text-blue-700 underline">
           Sign in
         </Link>
