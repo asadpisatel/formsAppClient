@@ -14,6 +14,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import axios from "../../utils/axiosInstance";
+import { AxiosError } from "axios";
 
 const minPassLen = 2;
 
@@ -47,14 +49,15 @@ const Page = () => {
 
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await axios.post("/user/registration", values);
 
-      console.log(values);
+      window.location.href = "/";
     } catch (error) {
-      form.setError("email", {
-        message: "This email is already taken",
-      });
-      console.log(error);
+      if ((error as AxiosError).status === 409) {
+        form.setError("email", {
+          message: "This email is already taken",
+        });
+      }
     }
   }
 
