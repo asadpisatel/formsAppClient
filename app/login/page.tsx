@@ -54,7 +54,7 @@ const Page = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 min-h-screen p-4">
+    <div className="flex flex-col justify-center items-center gap-4 min-h-screen p-4 rounded-md border">
       <h2 className="text-3xl">Login</h2>
       <Form {...form}>
         <form
