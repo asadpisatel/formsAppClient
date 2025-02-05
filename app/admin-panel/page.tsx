@@ -1,23 +1,28 @@
-import React from "react";
-import { columns } from "./columns";
+"use client";
+import React, { useEffect, useState } from "react";
+import { columns, User } from "./columns";
 import { DataTable } from "./data-table";
 import axios from "../../utils/axiosInstance";
-async function getData() {
-  try {
-    const response = await axios.get("/user/get_users");
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
-export default async function Page() {
-  const data = await getData();
+export default function Page() {
+  const [data, setData] = useState<User[]>([]);
+
+  async function getData() {
+    try {
+      const response = await axios.get("/user/get_users");
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
-      <div className="flex-1 text-sm text-muted-foreground"></div>
+      <DataTable columns={columns} data={data} refreshData={getData} />
     </div>
   );
 }

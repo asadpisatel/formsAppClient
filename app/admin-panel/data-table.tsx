@@ -23,11 +23,13 @@ import Toolbar from "@/components/toolbar";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  refreshData: () => Promise<void>;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { email: string }, TValue>({
   columns,
   data,
+  refreshData,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -38,6 +40,7 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onRowSelectionChange: setRowSelection,
+    getRowId: (row) => row.email,
     state: {
       sorting,
       rowSelection,
@@ -46,7 +49,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <Toolbar />
+      <Toolbar refreshData={refreshData} selectedRows={rowSelection} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

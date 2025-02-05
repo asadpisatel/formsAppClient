@@ -7,6 +7,7 @@ import { ArrowUpDown } from "lucide-react";
 export type User = {
   email: string;
   role: "USER" | "ADMIN";
+  status: "Blocked" | "Active";
 };
 
 export const columns: ColumnDef<User>[] = [
@@ -47,5 +48,9 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: "Role",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
   },
 ];
