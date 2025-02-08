@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Container } from "../components/container";
-import { useEffect } from "react";
-import { useAuthStore } from "../store/authStore";
-import axios from "../utils/axiosInstance";
+import AuthProvider from "../components/authProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,23 +25,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { login, logout } = useAuthStore();
-
-  useEffect(() => {
-    axios
-      .get("/user/me")
-      .then((res) => {
-        if (res.data.email) login(res.data);
-        else logout();
-      })
-      .catch(() => logout());
-  }, []);
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Container>{children}</Container>
+        <AuthProvider>
+          <Container>{children}</Container>
+        </AuthProvider>
       </body>
     </html>
   );
