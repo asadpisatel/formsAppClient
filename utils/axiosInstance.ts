@@ -5,6 +5,7 @@ const instance = axios.create({
     process.env.NODE_ENV === "production"
       ? "https://formsappserver.onrender.com"
       : "http://localhost:5000",
+  withCredentials: true,
 });
 
 export default instance;

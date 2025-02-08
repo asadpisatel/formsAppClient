@@ -21,7 +21,7 @@ const Toolbar = ({ refreshData, selectedRows }: ToolbarProps) => {
     if (selectedEmails.length === 0) return;
 
     try {
-      await axios.post(`/user/${action}`, { emails: selectedEmails });
+      await axios.post(`/admin/${action}`, { emails: selectedEmails });
 
       refreshData();
     } catch (error) {

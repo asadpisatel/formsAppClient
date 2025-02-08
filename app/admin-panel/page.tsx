@@ -9,7 +9,7 @@ export default function Page() {
 
   async function getData() {
     try {
-      const response = await axios.get("/user/get_users");
+      const response = await axios.get("/admin/get_users");
       setData(response.data);
     } catch (error) {
       console.log(error);
