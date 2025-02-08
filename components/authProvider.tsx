@@ -19,6 +19,7 @@ export default function AuthProvider({
         else logout();
       })
       .catch(() => logout());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{children}</>;
