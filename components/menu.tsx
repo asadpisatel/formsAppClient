@@ -23,9 +23,10 @@ const Menu = () => {
       <DropdownMenuContent className="ml-4">
         <DropdownMenuLabel>Menu</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/">Home</Link>
-        </DropdownMenuItem>
+        <Link href="/">
+          <DropdownMenuItem>Home</DropdownMenuItem>
+        </Link>
+
         <DropdownMenuItem>My Forms</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

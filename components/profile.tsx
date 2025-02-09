@@ -26,16 +26,18 @@ const Profile = () => {
       <DropdownMenuContent className="mr-4">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/login">Login</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/registration">Sign up</Link>
-        </DropdownMenuItem>
+        <Link href="/login">
+          <DropdownMenuItem>Login</DropdownMenuItem>
+        </Link>
+
+        <Link href="/registration">
+          <DropdownMenuItem>Sign up</DropdownMenuItem>
+        </Link>
+
         {isAuthenticated && user?.role === "ADMIN" ? (
-          <DropdownMenuItem>
-            <Link href="/admin-panel">Admin Panel</Link>
-          </DropdownMenuItem>
+          <Link href="/admin-panel">
+            <DropdownMenuItem>Admin Panel</DropdownMenuItem>
+          </Link>
         ) : null}
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
