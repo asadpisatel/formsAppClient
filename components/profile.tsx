@@ -33,7 +33,9 @@ const Profile = () => {
           <Link href="/registration">Sign up</Link>
         </DropdownMenuItem>
         {isAuthenticated && user?.role === "ADMIN" ? (
-          <DropdownMenuItem>Admin Panel</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/admin-panel">Admin Panel</Link>
+          </DropdownMenuItem>
         ) : null}
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
