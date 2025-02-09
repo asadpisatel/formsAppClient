@@ -13,6 +13,7 @@ import { User } from "lucide-react";
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
 import { ModeToggle } from "./mode-toggle";
+import Logout from "./logout";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuthStore();
@@ -42,6 +43,10 @@ const Profile = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <ModeToggle />
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="p-0">
+          <Logout />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
