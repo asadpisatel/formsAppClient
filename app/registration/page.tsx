@@ -62,7 +62,7 @@ const Page = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 min-h-screen">
+    <div className="flex flex-col justify-center items-center gap-4 min-h-full">
       <h2 className="text-3xl">Create account</h2>
       <Form {...form}>
         <form
