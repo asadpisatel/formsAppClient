@@ -9,22 +9,24 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslations } from "next-intl";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+  const t = useTranslations("profile");
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger>{t("theme")}</DropdownMenuSubTrigger>
       <DropdownMenuSubContent>
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          {t("light")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          {t("dark")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
+          {t("system")}
         </DropdownMenuItem>
       </DropdownMenuSubContent>
     </DropdownMenuSub>

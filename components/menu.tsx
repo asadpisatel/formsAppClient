@@ -11,8 +11,10 @@ import {
 import { Button } from "./ui/button";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const Menu = () => {
+  const t = useTranslations("menu");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,13 +23,13 @@ const Menu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="ml-4">
-        <DropdownMenuLabel>Menu</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("menu")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="/">
-          <DropdownMenuItem>Home</DropdownMenuItem>
+          <DropdownMenuItem>{t("home")}</DropdownMenuItem>
         </Link>
 
-        <DropdownMenuItem>My Forms</DropdownMenuItem>
+        <DropdownMenuItem>{t("my_forms")}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,7 +1,11 @@
+"use client";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
-  return <div className="">Home</div>;
+  const t = useTranslations("menu");
+
+  return <div className="">{t("home")}</div>;
 };
 
 export default Page;

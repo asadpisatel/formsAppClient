@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import axios from "../../utils/axiosInstance";
 import { AxiosError } from "axios";
+import { useTranslations } from "next-intl";
 
 const minPassLen = 2;
 
@@ -38,6 +39,7 @@ const schema = z
 type FormFields = z.infer<typeof schema>;
 
 const Page = () => {
+  const t = useTranslations("signup");
   const form = useForm<FormFields>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -63,7 +65,7 @@ const Page = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 min-h-full">
-      <h2 className="text-3xl">Create account</h2>
+      <h2 className="text-3xl">{t("title")}</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -73,7 +75,7 @@ const Page = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -90,7 +92,7 @@ const Page = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -103,7 +105,7 @@ const Page = () => {
             name="passwordConfirm"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password Confirm</FormLabel>
+                <FormLabel>{t("password_confirm")}</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -115,14 +117,14 @@ const Page = () => {
             disabled={form.formState.isSubmitting}
             type="submit"
             className="w-full">
-            {form.formState.isSubmitting ? "Loading..." : "Submit"}
+            {form.formState.isSubmitting ? t("loading") + "..." : t("submit")}
           </Button>
         </form>
       </Form>
       <p>
-        Already have an account?{" "}
+        {t("text")}{" "}
         <Link href="/login" className="text-blue-700 underline">
-          Sign in
+          {t("link")}
         </Link>
       </p>
     </div>

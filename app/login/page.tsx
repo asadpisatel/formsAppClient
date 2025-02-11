@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import axios from "../../utils/axiosInstance";
 import { AxiosError } from "axios";
+import { useTranslations } from "next-intl";
 
 const minPassLen = 2;
 
@@ -27,6 +28,7 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Page = () => {
+  const t = useTranslations("login");
   const form = useForm<FormFields>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -55,7 +57,7 @@ const Page = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 min-h-full">
-      <h2 className="text-3xl">Login</h2>
+      <h2 className="text-3xl">{t("title")}</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -65,7 +67,7 @@ const Page = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -82,7 +84,7 @@ const Page = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -95,14 +97,14 @@ const Page = () => {
             disabled={form.formState.isSubmitting}
             type="submit"
             className="w-full">
-            {form.formState.isSubmitting ? "Loading..." : "Submit"}
+            {form.formState.isSubmitting ? t("loading") + "..." : t("submit")}
           </Button>
         </form>
       </Form>
       <p>
-        Don&apos;t have an account?{" "}
+        {t("text")}{" "}
         <Link href="/registration" className="text-blue-700 underline">
-          Sign up
+          {t("link")}
         </Link>
       </p>
     </div>

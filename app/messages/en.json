@@ -1,0 +1,46 @@
+{
+  "menu": {
+    "menu": "Menu",
+    "home": "Home",
+    "my_forms": "My Forms"
+  },
+  "profile": {
+    "my_account": "My Account",
+    "login": "Login",
+    "sign_up": "Sign up",
+    "admin_panel": "Admin Panle",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "loading": "Loading",
+    "text": "Don't have an account?",
+    "link": "Sign up"
+  },
+  "signup": {
+    "title": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "password_confirm": "Password Confirm",
+    "submit": "Submit",
+    "loading": "Loading",
+    "text": "Already have an account?",
+    "link": "Sign in"
+  },
+  "admin_panel": {
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "no_results": "No results",
+    "block": "Block",
+    "make_admin": "Make admin"
+  }
+}

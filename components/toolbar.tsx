@@ -8,6 +8,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import axios from "../utils/axiosInstance";
+import { useTranslations } from "next-intl";
 
 type ToolbarProps = {
   refreshData: () => Promise<void>;
@@ -16,6 +17,7 @@ type ToolbarProps = {
 
 const Toolbar = ({ refreshData, selectedRows }: ToolbarProps) => {
   const selectedEmails = Object.keys(selectedRows);
+  const t = useTranslations("admin_panel");
 
   async function handleAction(action: string) {
     if (selectedEmails.length === 0) return;
@@ -31,7 +33,7 @@ const Toolbar = ({ refreshData, selectedRows }: ToolbarProps) => {
   return (
     <div className="flex gap-3 flex-wrap rounded-md border p-3 mb-5">
       <Button onClick={() => handleAction("block")}>
-        <LockKeyhole /> Block
+        <LockKeyhole /> {t("block")}
       </Button>
       <Button onClick={() => handleAction("unblock")}>
         <LockKeyholeOpen />
@@ -40,10 +42,10 @@ const Toolbar = ({ refreshData, selectedRows }: ToolbarProps) => {
         <Trash2 />
       </Button>
       <Button onClick={() => handleAction("make_admin")}>
-        <UserPlus /> Make Admin
+        <UserPlus /> {t("make_admin")}
       </Button>
       <Button onClick={() => handleAction("remove_admin")}>
-        <UserMinus /> Remove Admin
+        <UserMinus />
       </Button>
     </div>
   );

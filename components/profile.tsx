@@ -14,9 +14,12 @@ import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
 import { ModeToggle } from "./mode-toggle";
 import Logout from "./logout";
+import LocaleSWitcher from "./localeSwitcher";
+import { useTranslations } from "next-intl";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuthStore();
+  const t = useTranslations("profile");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,24 +28,27 @@ const Profile = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mr-4">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("my_account")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="/login">
-          <DropdownMenuItem>Login</DropdownMenuItem>
+          <DropdownMenuItem>{t("login")}</DropdownMenuItem>
         </Link>
 
         <Link href="/registration">
-          <DropdownMenuItem>Sign up</DropdownMenuItem>
+          <DropdownMenuItem>{t("sign_up")}</DropdownMenuItem>
         </Link>
 
         {isAuthenticated && user?.role === "ADMIN" ? (
           <Link href="/admin-panel">
-            <DropdownMenuItem>Admin Panel</DropdownMenuItem>
+            <DropdownMenuItem>{t("admin_panel")}</DropdownMenuItem>
           </Link>
         ) : null}
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <ModeToggle />
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <LocaleSWitcher />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="p-0">

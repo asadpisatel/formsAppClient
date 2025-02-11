@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import Toolbar from "@/components/toolbar";
+import { useTranslations } from "next-intl";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +32,7 @@ export function DataTable<TData extends { email: string }, TValue>({
   data,
   refreshData,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("admin_panel");
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({
@@ -91,7 +93,7 @@ export function DataTable<TData extends { email: string }, TValue>({
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center">
-                  No results.
+                  {t("no_results")}.
                 </TableCell>
               </TableRow>
             )}
