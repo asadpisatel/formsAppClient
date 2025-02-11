@@ -15,7 +15,7 @@ export default function AuthProvider({
     axios
       .get("/user/me")
       .then((res) => {
-        if (res.data.email) login(res.data);
+        if (res.data.id) login(res.data);
         else logout();
       })
       .catch(() => logout());
