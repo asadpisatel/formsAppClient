@@ -1,7 +1,10 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { any } from 'zod';
 
 export type User = {
   email: string;
@@ -9,7 +12,9 @@ export type User = {
   status: "Blocked" | "Active";
 };
 
-
+type CustomTableMeta = {
+  t: (key: string) => string;
+};
 
 
 export const columns:  ColumnDef<User>[] = [
@@ -38,11 +43,12 @@ export const columns:  ColumnDef<User>[] = [
   {
     accessorKey: "email",
     header: ({ column, table }) => {
+      const t = (table.options.meta as CustomTableMeta)?.t
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {table.options.meta?.t('email')} <ArrowUpDown className="ml-2 h-4 w-4" />
+          {t('email')} <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -50,13 +56,15 @@ export const columns:  ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: ({table}) => {
-      return table.options.meta?.t('role')
+      const t = (table.options.meta as CustomTableMeta)?.t
+      return t('role')
     },
   },
   {
     accessorKey: "status",
     header: ({table}) => {
-      return table.options.meta?.t('status')
+      const t = (table.options.meta as CustomTableMeta)?.t
+      return t('status')
     },
   },
 ];

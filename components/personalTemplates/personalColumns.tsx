@@ -9,6 +9,10 @@ export type Template = {
   createdAt: string;
 };
 
+type CustomTableMeta = {
+  t: (key: string) => string;
+};
+
 export const columns: ColumnDef<Template>[] = [
   {
     id: "select",
@@ -35,17 +39,20 @@ export const columns: ColumnDef<Template>[] = [
   {
     accessorKey: "title",
     header: ({ column, table }) => {
+      const t = (table.options.meta as CustomTableMeta)?.t
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {table.options.meta?.t('title')} <ArrowUpDown className="ml-2 h-4 w-4" />
+          {t('title')} <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
     accessorKey: "createdAt",
-    header: ({table}) => table.options.meta?.t('created_at'),
+    header: ({table}) => {
+      const t = (table.options.meta as CustomTableMeta)?.t
+      return t('created_at')},
   },
 ];

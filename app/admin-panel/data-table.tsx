@@ -28,6 +28,7 @@ interface DataTableProps<TData, TValue> {
 }
 
 
+
 export function DataTable<TData extends { email: string }, TValue>({
   columns,
   data,
@@ -50,7 +51,7 @@ export function DataTable<TData extends { email: string }, TValue>({
       rowSelection,
     },
     
-  });
+  },);
 
   return (
     <div>
