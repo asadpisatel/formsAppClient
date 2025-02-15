@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
