@@ -19,7 +19,6 @@ import { useTranslations } from "next-intl";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuthStore();
-  console.log(user);
   const t = useTranslations("profile");
   return (
     <DropdownMenu>

@@ -29,7 +29,9 @@ const Menu = () => {
           <DropdownMenuItem>{t("home")}</DropdownMenuItem>
         </Link>
 
-        <DropdownMenuItem>{t("my_forms")}</DropdownMenuItem>
+        <Link href="/my-forms">
+          <DropdownMenuItem>{t("my_forms")}</DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

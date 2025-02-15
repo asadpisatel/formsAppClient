@@ -27,6 +27,7 @@ interface DataTableProps<TData, TValue> {
   refreshData: () => Promise<void>;
 }
 
+
 export function DataTable<TData extends { email: string }, TValue>({
   columns,
   data,
@@ -37,6 +38,7 @@ export function DataTable<TData extends { email: string }, TValue>({
   const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({
     data,
+    meta: {t},
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -47,6 +49,7 @@ export function DataTable<TData extends { email: string }, TValue>({
       sorting,
       rowSelection,
     },
+    
   });
 
   return (

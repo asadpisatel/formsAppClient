@@ -17,11 +17,13 @@ import Link from "next/link";
 import axios from "../../utils/axiosInstance";
 import { AxiosError } from "axios";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const minPassLen = 2;
 
 const schema = z
   .object({
+    name: z.string().nonempty(),
     email: z.string().email(),
     password: z.string().min(minPassLen),
     passwordConfirm: z.string(),
@@ -40,10 +42,13 @@ type FormFields = z.infer<typeof schema>;
 
 const Page = () => {
   const t = useTranslations("signup");
+  const router = useRouter();
   const form = useForm<FormFields>({
     resolver: zodResolver(schema),
     defaultValues: {
+      name: "",
       email: "",
+
       password: "",
       passwordConfirm: "",
     },
@@ -52,8 +57,7 @@ const Page = () => {
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
       await axios.post("/user/registration", values);
-
-      window.location.href = "/";
+      router.push("/");
     } catch (error) {
       if ((error as AxiosError).status === 409) {
         form.setError("email", {
@@ -70,6 +74,19 @@ const Page = () => {
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="max-w-md w-full space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("name")}</FormLabel>
+                <FormControl>
+                  <Input type="text" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"

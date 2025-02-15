@@ -17,6 +17,7 @@ import Link from "next/link";
 import axios from "../../utils/axiosInstance";
 import { AxiosError } from "axios";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const minPassLen = 2;
 
@@ -29,6 +30,7 @@ type FormFields = z.infer<typeof schema>;
 
 const Page = () => {
   const t = useTranslations("login");
+  const router = useRouter();
   const form = useForm<FormFields>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -40,7 +42,7 @@ const Page = () => {
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
       await axios.post("/user/login", values);
-      window.location.href = "/";
+      router.push("/");
     } catch (error) {
       if ((error as AxiosError).status === 401) {
         form.setError("email", {

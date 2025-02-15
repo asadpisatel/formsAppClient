@@ -1,19 +1,15 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { useTranslations } from "next-intl";
 
-export type User = {
-  email: string;
-  role: "USER" | "ADMIN";
-  status: "Blocked" | "Active";
+export type Template = {
+  title: string;
+  createdAt: string;
 };
 
-
-
-
-export const columns:  ColumnDef<User>[] = [
+export const columns: ColumnDef<Template>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -37,27 +33,19 @@ export const columns:  ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "email",
+    accessorKey: "title",
     header: ({ column, table }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {table.options.meta?.t('email')} <ArrowUpDown className="ml-2 h-4 w-4" />
+          {table.options.meta?.t('title')} <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "role",
-    header: ({table}) => {
-      return table.options.meta?.t('role')
-    },
-  },
-  {
-    accessorKey: "status",
-    header: ({table}) => {
-      return table.options.meta?.t('status')
-    },
+    accessorKey: "createdAt",
+    header: ({table}) => table.options.meta?.t('created_at'),
   },
 ];

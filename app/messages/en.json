@@ -8,7 +8,7 @@
     "my_account": "My Account",
     "login": "Login",
     "sign_up": "Sign up",
-    "admin_panel": "Admin Panle",
+    "admin_panel": "Admin Panel",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
@@ -27,6 +27,7 @@
   },
   "signup": {
     "title": "Create account",
+    "name": "Name",
     "email": "Email",
     "password": "Password",
     "password_confirm": "Password Confirm",
@@ -42,5 +43,12 @@
     "no_results": "No results",
     "block": "Block",
     "make_admin": "Make admin"
+  },
+  "my_forms": {
+    "templates": "Templates",
+    "responses": "Responses",
+    "no_results": "No results",
+    "title": "Title",
+    "created_at": "Created At"
   }
 }
