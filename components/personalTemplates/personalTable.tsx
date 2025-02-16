@@ -26,7 +26,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function DataTable<TData extends { id: string }, TValue>({
+export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -78,7 +78,6 @@ export function DataTable<TData extends { id: string }, TValue>({
               
               <TableRow
                 key={row.id}
-                onClick={() => router.push(`/template/${row.original.id}`)}
                 data-state={row.getIsSelected() && "selected"}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

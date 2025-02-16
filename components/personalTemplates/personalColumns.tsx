@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import Link from "next/link";
 
 export type Template = {
   id: string,
@@ -49,6 +50,9 @@ export const columns: ColumnDef<Template>[] = [
         </Button>
       );
     },
+    cell: ({row}) => {
+      return <Link className="hover:underline underline-offset-4" href={`/template/${row.original.id}`} >{row.getValue('title')}</Link>
+    }
   },
   {
     accessorKey: "createdAt",
