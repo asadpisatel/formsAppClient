@@ -26,7 +26,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { id: string }, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -47,6 +47,9 @@ export function DataTable<TData, TValue>({
       rowSelection,
     },
   });
+
+
+
 
   return (
     <div className="rounded-md border">
@@ -72,10 +75,10 @@ export function DataTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-             
+              
               <TableRow
                 key={row.id}
-                onClick={() => router.push("/")}
+                onClick={() => router.push(`/template/${row.original.id}`)}
                 data-state={row.getIsSelected() && "selected"}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
