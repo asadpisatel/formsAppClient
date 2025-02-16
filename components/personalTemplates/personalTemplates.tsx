@@ -8,7 +8,7 @@ import { useAuthStore } from "@/store/authStore";
 
 const PersonalTemplates = () => {
   const [data, setData] = useState<Template[]>([]);
-  const { user } = useAuthStore();
+const {user, isAuthenticated} = useAuthStore()
 
   async function getData() {
     try {
@@ -21,11 +21,13 @@ const PersonalTemplates = () => {
     }
   }
 
+  
+
   useEffect(() => {
-    if (user?.id) {
+    if (isAuthenticated) {
       getData();
     }
-  }, [user]);
+  }, [isAuthenticated]);
 
   return (
     <div className="">
