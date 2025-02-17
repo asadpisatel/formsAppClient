@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
+import GeneralSettings from "@/components/generalSettings";
 
 const Page = () => {
   const t = useTranslations("template_page");
@@ -39,7 +40,7 @@ const Page = () => {
             <TabsTrigger value="responses">{t("responses")}</TabsTrigger>
           </TabsList>
           <TabsContent value="general settings">
-            general_settings {id}
+            <GeneralSettings />
           </TabsContent>
           <TabsContent value="questions">questions</TabsContent>
           <TabsContent value="responses">responses</TabsContent>

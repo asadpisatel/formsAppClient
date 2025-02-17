@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { DataTable } from "./personalTable";
-import { columns, Template } from "./personalColumns";
+import { DataTable } from "./data-table";
+import { columns, Template } from "./columns";
 import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
 

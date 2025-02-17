@@ -54,6 +54,10 @@
   "template_page": {
     "general_settings": "General Settings",
     "questions": "Questions",
-    "responses": "Responses"
+    "responses": "Responses",
+    "title": "Title",
+    "description": "Description",
+    "topic": "Topic",
+    "save": "Save"
   }
 }

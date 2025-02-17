@@ -46,7 +46,6 @@ const Page = () => {
     defaultValues: {
       name: "",
       email: "",
-
       password: "",
       passwordConfirm: "",
     },
@@ -55,7 +54,7 @@ const Page = () => {
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
       await axios.post("/user/registration", values);
-      window.location.href = "/"
+      window.location.href = "/";
     } catch (error) {
       if ((error as AxiosError).status === 409) {
         form.setError("email", {

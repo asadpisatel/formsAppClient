@@ -54,6 +54,10 @@
   "template_page": {
     "general_settings": "Общие Настройки",
     "questions": "Вопросы",
-    "responses": "Ответы"
+    "responses": "Ответы",
+    "title": "Заголовок",
+    "description": "Описание",
+    "topic": "Тема",
+    "save": "Сохранить"
   }
 }
