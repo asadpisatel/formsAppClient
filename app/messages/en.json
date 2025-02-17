@@ -50,5 +50,10 @@
     "no_results": "No results",
     "title": "Title",
     "created_at": "Created At"
+  },
+  "template_page": {
+    "general_settings": "General Settings",
+    "questions": "Questions",
+    "responses": "Responses"
   }
 }

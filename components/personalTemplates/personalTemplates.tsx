@@ -8,22 +8,17 @@ import { useAuthStore } from "@/store/authStore";
 
 const PersonalTemplates = () => {
   const [data, setData] = useState<Template[]>([]);
-const {user, isAuthenticated} = useAuthStore()
-
-  async function getData() {
-    try {
-      const response = await axios.post("/personal/templates", {
-        userId: user?.id,
-      });
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  
+  const { isAuthenticated } = useAuthStore();
 
   useEffect(() => {
+    async function getData() {
+      try {
+        const response = await axios.get("/personal/templates");
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     if (isAuthenticated) {
       getData();
     }

@@ -50,5 +50,10 @@
     "no_results": "Нет результатов",
     "title": "Заголовок",
     "created_at": "Создано в"
+  },
+  "template_page": {
+    "general_settings": "Общие Настройки",
+    "questions": "Вопросы",
+    "responses": "Ответы"
   }
 }
