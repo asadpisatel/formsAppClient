@@ -25,7 +25,7 @@ const PersonalTemplates = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className="">
+    <div>
       <DataTable columns={columns} data={data} />
     </div>
   );
