@@ -5,9 +5,13 @@ import { useAuthStore } from "@/store/authStore";
 
 const Page = () => {
   const t = useTranslations("menu");
-  const {isAuthenticated} = useAuthStore()
+  const { isAuthenticated } = useAuthStore();
 
-  return <div className="">{t("home")} {isAuthenticated ? "Залогинен": "не залогинен"}</div>;
+  return (
+    <div className="">
+      {t("home")} {isAuthenticated ? "Залогинен" : "не залогинен"}{" "}
+    </div>
+  );
 };
 
 export default Page;
