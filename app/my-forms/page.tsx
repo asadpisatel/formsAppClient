@@ -1,4 +1,5 @@
 "use client";
+
 import PersonalTemplates from "@/components/templates/personalTemplates";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
