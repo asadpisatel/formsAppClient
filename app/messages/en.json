@@ -59,7 +59,13 @@
     "title": "Title",
     "description": "Description",
     "topic": "Topic",
-    "save": "Save"
+    "save": "Save",
+    "general": "General",
+    "business": "Business",
+    "education": "Education",
+    "quiz": "Quiz",
+    "test": "Test",
+    "another": "Another"
   },
   "create_template": {
     "title": "Title",

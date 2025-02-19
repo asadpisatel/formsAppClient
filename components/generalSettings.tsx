@@ -123,11 +123,12 @@ const GeneralSettings = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {topics.map((topic) => (
-                      <SelectItem key={topic} value={topic}>
-                        {topic}
-                      </SelectItem>
-                    ))}
+                    <SelectItem value="General">{t("general")}</SelectItem>
+                    <SelectItem value="Business">{t("business")}</SelectItem>
+                    <SelectItem value="Education">{t("education")}</SelectItem>
+                    <SelectItem value="Quiz">{t("quiz")}</SelectItem>
+                    <SelectItem value="Test">{t("test")}</SelectItem>
+                    <SelectItem value="Another">{t("another")}</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

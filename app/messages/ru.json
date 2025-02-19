@@ -59,7 +59,13 @@
     "title": "Заголовок",
     "description": "Описание",
     "topic": "Тема",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "general": "Общие",
+    "business": "Бизнес",
+    "education": "Образование",
+    "quiz": "Викторина",
+    "test": "Тест",
+    "another": "Другое"
   },
   "create_template": {
     "title": "Заголовок",

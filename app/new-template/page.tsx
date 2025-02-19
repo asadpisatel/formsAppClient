@@ -12,6 +12,7 @@ const Page = () => {
 
     try {
       await axios.post("/template/create", data);
+      alert("Template saved!");
     } catch (error) {
       console.error(error);
     }
