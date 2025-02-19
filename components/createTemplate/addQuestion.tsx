@@ -1,24 +1,27 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type AddQuestionProps = {
   onAdd: (type: "string" | "text" | "int" | "checkbox") => void;
 };
 
 export function AddQuestion({ onAdd }: AddQuestionProps) {
+  const t = useTranslations("create_template");
   return (
     <div className="flex gap-2">
       <Button onClick={() => onAdd("string")} variant="outline">
-        Добавить короткий ответ
+        <Plus /> {t("string")}
       </Button>
       <Button onClick={() => onAdd("text")} variant="outline">
-        Добавить развернутый ответ
+        <Plus /> {t("text")}
       </Button>
       <Button onClick={() => onAdd("int")} variant="outline">
-        Добавить число
+        <Plus /> {t("int")}
       </Button>
       <Button onClick={() => onAdd("checkbox")} variant="outline">
-        Добавить флажок
+        <Plus /> {t("checkbox")}
       </Button>
     </div>
   );

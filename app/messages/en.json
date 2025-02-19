@@ -49,7 +49,8 @@
     "responses": "Responses",
     "no_results": "No results",
     "title": "Title",
-    "created_at": "Created At"
+    "created_at": "Created At",
+    "new": "New"
   },
   "template_page": {
     "general_settings": "General Settings",
@@ -59,5 +60,21 @@
     "description": "Description",
     "topic": "Topic",
     "save": "Save"
+  },
+  "create_template": {
+    "title": "Title",
+    "description": "Description",
+    "general": "General",
+    "business": "Business",
+    "education": "Education",
+    "quiz": "Quiz",
+    "test": "Test",
+    "another": "Another",
+    "save": "Save",
+    "string": "String",
+    "text": "Text",
+    "int": "Integer",
+    "checkbox": "Checkbox",
+    "hint": "Enter your question"
   }
 }

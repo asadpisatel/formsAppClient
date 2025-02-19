@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 
 const MAX_QUESTIONS_PER_TYPE = 4;
 
@@ -37,6 +38,7 @@ export function TemplateForm({ onSave }: TemplateFormProps) {
   const [description, setDescription] = useState("");
   const [topic, setTopic] = useState("Another");
   const [questions, setQuestions] = useState<Question[]>([]);
+  const t = useTranslations("create_template");
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -141,12 +143,12 @@ export function TemplateForm({ onSave }: TemplateFormProps) {
   return (
     <div className="space-y-4 p-4 shadow rounded-lg">
       <Input
-        placeholder="Заголовок"
+        placeholder={t("title")}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <Textarea
-        placeholder="Описание"
+        placeholder={t("description")}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
@@ -155,12 +157,12 @@ export function TemplateForm({ onSave }: TemplateFormProps) {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="General">General</SelectItem>
-          <SelectItem value="Business">Business</SelectItem>
-          <SelectItem value="Education">Education</SelectItem>
-          <SelectItem value="Quiz">Quiz</SelectItem>
-          <SelectItem value="Test">Test</SelectItem>
-          <SelectItem value="Another">Another</SelectItem>
+          <SelectItem value="General">{t("general")}</SelectItem>
+          <SelectItem value="Business">{t("business")}</SelectItem>
+          <SelectItem value="Education">{t("education")}</SelectItem>
+          <SelectItem value="Quiz">{t("quiz")}</SelectItem>
+          <SelectItem value="Test">{t("test")}</SelectItem>
+          <SelectItem value="Another">{t("another")}</SelectItem>
         </SelectContent>
       </Select>
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -178,7 +180,7 @@ export function TemplateForm({ onSave }: TemplateFormProps) {
         </SortableContext>
       </DndContext>
       <AddQuestion onAdd={handleAddQuestion} />
-      <Button onClick={handleSubmit}>Сохранить</Button>
+      <Button onClick={handleSubmit}>{t("save")}</Button>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Question } from "./templateForm";
 import { GripVertical, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type QuestionItemProps = {
   question: Question;
@@ -23,6 +24,7 @@ export function QuestionItem({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+  const t = useTranslations("create_template");
 
   return (
     <div
@@ -32,7 +34,7 @@ export function QuestionItem({
       <Input
         value={question.text}
         onChange={(e) => onChange(question.id, e.target.value)}
-        placeholder="Введите вопрос"
+        placeholder={t("hint")}
       />
       <Button variant="destructive" onClick={() => onDelete(question.id)}>
         <Trash2 />

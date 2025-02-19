@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { FilePlus } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -51,8 +52,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div>
-        <Button onClick={() => router.push("/new-template")}>+ New</Button>
+      <div className="rounded border p-4 my-4">
+        <Button onClick={() => router.push("/new-template")}>
+          <FilePlus /> {t("new")}
+        </Button>
       </div>
       <div className="rounded border">
         <Table>
