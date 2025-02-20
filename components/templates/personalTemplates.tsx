@@ -5,12 +5,14 @@ import { DataTable } from "./data-table";
 import { columns, Template } from "./columns";
 import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
-import { useFormatter } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 const PersonalTemplates = () => {
   const [data, setData] = useState<Template[]>([]);
   const { isAuthenticated } = useAuthStore();
   const format = useFormatter();
+  const t = useTranslations("my_forms");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
@@ -25,12 +27,16 @@ const PersonalTemplates = () => {
         setData(updatedData);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
     if (isAuthenticated) {
       getData();
     }
   }, [isAuthenticated, format]);
+
+  if (loading) return <p>{t("loading")}...</p>;
 
   return (
     <div>

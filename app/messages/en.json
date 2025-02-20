@@ -42,7 +42,8 @@
     "status": "Status",
     "no_results": "No results",
     "block": "Block",
-    "make_admin": "Make admin"
+    "make_admin": "Make admin",
+    "loading": "Loading"
   },
   "my_forms": {
     "templates": "Templates",
@@ -50,7 +51,8 @@
     "no_results": "No results",
     "title": "Title",
     "created_at": "Created At",
-    "new": "New"
+    "new": "New",
+    "loading": "Loading"
   },
   "template_page": {
     "general_settings": "General Settings",
@@ -65,9 +67,11 @@
     "education": "Education",
     "quiz": "Quiz",
     "test": "Test",
-    "another": "Another"
+    "another": "Another",
+    "loading": "Loading"
   },
   "create_template": {
+    "create_template": "Create template",
     "title": "Title",
     "description": "Description",
     "general": "General",

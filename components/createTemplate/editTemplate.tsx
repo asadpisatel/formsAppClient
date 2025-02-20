@@ -12,6 +12,7 @@ import { AddQuestion } from "./addQuestion";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import axios from "@/utils/axiosInstance";
+import { useTranslations } from "next-intl";
 
 const MAX_QUESTIONS_PER_TYPE = 4;
 
@@ -100,6 +101,7 @@ export function EditQuestions() {
   const { id } = useParams();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations("template_page");
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -151,10 +153,11 @@ export function EditQuestions() {
     }
   };
 
-  if (loading) return <p>Загрузка...</p>;
+  if (loading) return <p>{t("loading")}...</p>;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 mt-8">
+      <h2 className="text-2xl font-semibold">{t("questions")}</h2>
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext
           items={questions.map((q) => q.id)}
@@ -170,7 +173,7 @@ export function EditQuestions() {
         </SortableContext>
       </DndContext>
       <AddQuestion onAdd={handleAddQuestion} />
-      <Button onClick={handleSave}>Сохранить</Button>
+      <Button onClick={handleSave}>{t("save")}</Button>
     </div>
   );
 }

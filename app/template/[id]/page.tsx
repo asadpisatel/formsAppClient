@@ -14,6 +14,7 @@ const Page = () => {
   const { user } = useAuthStore();
   const [isAuthor, setIsAuthor] = useState(false);
   const [hasResponse, setHasResponse] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function checkTemplate() {
@@ -23,11 +24,15 @@ const Page = () => {
         setHasResponse(res.data.hasResponse);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
 
     if (user) checkTemplate();
   }, [id, user]);
+
+  if (loading) return <p>{t("loading")}...</p>;
 
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,6 +47,7 @@ type GeneralSettingsForm = z.infer<typeof GeneralSettingsSchema>;
 const GeneralSettings = () => {
   const { id } = useParams();
   const t = useTranslations("template_page");
+  const [loading, setLoading] = useState(true);
 
   const form = useForm<GeneralSettingsForm>({
     resolver: zodResolver(GeneralSettingsSchema),
@@ -60,6 +61,8 @@ const GeneralSettings = () => {
         form.reset(res.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -74,6 +77,8 @@ const GeneralSettings = () => {
       console.error(error);
     }
   };
+
+  if (loading) return <p>{t("loading")}...</p>;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 mt-8">

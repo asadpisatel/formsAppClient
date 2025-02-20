@@ -42,7 +42,8 @@
     "status": "Статус",
     "no_results": "Нет результатов",
     "block": "Заблокировать",
-    "make_admin": "Назначить админом"
+    "make_admin": "Назначить админом",
+    "loading": "Загрузка"
   },
   "my_forms": {
     "templates": "Шаблоны",
@@ -50,7 +51,8 @@
     "no_results": "Нет результатов",
     "title": "Заголовок",
     "created_at": "Создано в",
-    "new": "Новый"
+    "new": "Новый",
+    "loading": "Загрузка"
   },
   "template_page": {
     "general_settings": "Общие Настройки",
@@ -65,9 +67,11 @@
     "education": "Образование",
     "quiz": "Викторина",
     "test": "Тест",
-    "another": "Другое"
+    "another": "Другое",
+    "loading": "Загрузка"
   },
   "create_template": {
+    "create_template": "Создать шаблон",
     "title": "Заголовок",
     "description": "Описание",
     "general": "Общие",
