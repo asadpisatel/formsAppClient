@@ -1,18 +1,63 @@
 "use client";
-import React from "react";
-import { useFormatter, useTranslations } from "next-intl";
-import { useAuthStore } from "@/store/authStore";
+import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import axios from "@/utils/axiosInstance";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+type User = {
+  name: string;
+};
+
+type Template = {
+  title: string;
+  description: string;
+  user: User;
+};
 
 const Page = () => {
   const t = useTranslations("menu");
-  const format = useFormatter();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-  const { isAuthenticated } = useAuthStore();
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await axios.get("/home/get-latest");
+        console.log(res.data);
+        setData(res.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getData();
+  }, []);
+
+  if (loading) return <p>{t("loading")}...</p>;
 
   return (
-    <div className="">
-      {t("home")} {isAuthenticated ? "Залогинен" : "не залогинен"}{" "}
-      {format.relativeTime(new Date("2025-02-14T13:08:06.698Z"))}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
+      {data.map((item: Template, index) => (
+        <Card key={index}>
+          <CardHeader>
+            <CardTitle>{item.title}</CardTitle>
+            <CardDescription>{item.description}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <i>
+              {t("author")}: {item.user.name}
+            </i>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 };

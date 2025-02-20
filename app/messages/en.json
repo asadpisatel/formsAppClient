@@ -2,7 +2,9 @@
   "menu": {
     "menu": "Menu",
     "home": "Home",
-    "my_forms": "My Forms"
+    "my_forms": "My Forms",
+    "loading": "Loading",
+    "author": "Author"
   },
   "profile": {
     "my_account": "My Account",
