@@ -56,7 +56,7 @@ const GeneralSettings = () => {
   useEffect(() => {
     async function fetchTemplate() {
       try {
-        const res = await axios.get(`/template/${id}`);
+        const res = await axios.get(`/template/${id}/general-settings`);
         form.reset(res.data);
       } catch (error) {
         console.error(error);
@@ -68,7 +68,7 @@ const GeneralSettings = () => {
 
   const onSubmit = async (data: GeneralSettingsForm) => {
     try {
-      await axios.put("/template/update", { id, ...data });
+      await axios.put(`/template/${id}/general-settings`, data);
       alert("Template saved!");
     } catch (error) {
       console.error(error);
@@ -114,9 +114,7 @@ const GeneralSettings = () => {
             render={({ field }) => (
               <FormItem>
                 <Label htmlFor="topic">{t("topic")}</Label>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger id="topic">
                       <SelectValue />

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
 import GeneralSettings from "@/components/generalSettings";
+import { EditQuestions } from "@/components/createTemplate/editTemplate";
 
 const Page = () => {
   const t = useTranslations("template_page");
@@ -42,7 +43,9 @@ const Page = () => {
           <TabsContent value="general settings">
             <GeneralSettings />
           </TabsContent>
-          <TabsContent value="questions">questions</TabsContent>
+          <TabsContent value="questions">
+            <EditQuestions />
+          </TabsContent>
           <TabsContent value="responses">responses</TabsContent>
         </Tabs>
       )}

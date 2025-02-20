@@ -141,7 +141,7 @@ export function TemplateForm({ onSave }: TemplateFormProps) {
   };
 
   return (
-    <div className="space-y-4 p-4 shadow rounded-lg">
+    <div className="max-w-2xl mx-auto space-y-6 mt-8">
       <Input
         placeholder={t("title")}
         value={title}
