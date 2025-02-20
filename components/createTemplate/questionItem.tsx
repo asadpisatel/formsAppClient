@@ -24,6 +24,10 @@ export function QuestionItem({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+  const styles = {
+    touchAction: "none",
+  };
+
   const t = useTranslations("create_template");
 
   return (
@@ -39,7 +43,7 @@ export function QuestionItem({
       <Button variant="destructive" onClick={() => onDelete(question.id)}>
         <Trash2 />
       </Button>
-      <Button variant="outline" {...attributes} {...listeners}>
+      <Button variant="outline" style={styles} {...attributes} {...listeners}>
         <GripVertical />
       </Button>
     </div>
