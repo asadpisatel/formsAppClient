@@ -7,13 +7,13 @@ import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
 import GeneralSettings from "@/components/generalSettings";
 import { EditQuestions } from "@/components/createTemplate/editTemplate";
+import TemplateFIlling from "@/components/templateFilling";
 
 const Page = () => {
   const t = useTranslations("template_page");
   const { id } = useParams();
   const { user } = useAuthStore();
   const [isAuthor, setIsAuthor] = useState(false);
-  const [hasResponse, setHasResponse] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +21,6 @@ const Page = () => {
       try {
         const res = await axios.post("/template/check", { id });
         setIsAuthor(res.data.isAuthor);
-        setHasResponse(res.data.hasResponse);
       } catch (error) {
         console.error(error);
       } finally {
@@ -55,9 +54,11 @@ const Page = () => {
         </Tabs>
       )}
 
-      {!isAuthor && !hasResponse && <div>empty forms</div>}
-
-      {!isAuthor && hasResponse && <div>full forms</div>}
+      {!isAuthor && (
+        <div>
+          <TemplateFIlling />
+        </div>
+      )}
     </>
   );
 };

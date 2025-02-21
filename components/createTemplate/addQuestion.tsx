@@ -10,7 +10,7 @@ type AddQuestionProps = {
 export function AddQuestion({ onAdd }: AddQuestionProps) {
   const t = useTranslations("create_template");
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       <Button onClick={() => onAdd("string")} variant="outline">
         <Plus /> {t("string")}
       </Button>

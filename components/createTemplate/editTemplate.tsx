@@ -13,16 +13,11 @@ import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import axios from "@/utils/axiosInstance";
 import { useTranslations } from "next-intl";
+import { Question } from "./templateForm";
 
 const MAX_QUESTIONS_PER_TYPE = 4;
 
-export type Question = {
-  id: string;
-  type: "string" | "text" | "int" | "checkbox";
-  text: string;
-};
-
-const transformFromApi = (data: any): Question[] => {
+export const transformFromApi = (data: any): Question[] => {
   const questions: Question[] = [];
   for (let i = 1; i <= MAX_QUESTIONS_PER_TYPE; i++) {
     if (data[`customString${i}State`]) {

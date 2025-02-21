@@ -9,12 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 type User = {
   name: string;
 };
 
 type Template = {
+  id: string;
   title: string;
   description: string;
   user: User;
@@ -48,7 +50,13 @@ const Page = () => {
       {data.map((item: Template, index) => (
         <Card key={index}>
           <CardHeader>
-            <CardTitle>{item.title}</CardTitle>
+            <CardTitle>
+              <Link
+                className="hover:underline underline-offset-4"
+                href={`/template/${item.id}`}>
+                {item.title}
+              </Link>
+            </CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </CardHeader>
           <CardContent>
