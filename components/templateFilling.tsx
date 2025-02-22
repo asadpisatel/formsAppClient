@@ -19,19 +19,27 @@ import { useTranslations } from "next-intl";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useAuthStore } from "@/store/authStore";
 
-function transformResponses(data: any) {
+function transformResponses(formattedResponses: any) {
   const transformed: any = {};
+  let stringCount = 1;
+  let textCount = 1;
+  let intCount = 1;
+  let checkboxCount = 1;
 
-  Object.entries(data).forEach(([key, value]) => {
-    if (key.startsWith("customString")) {
-      transformed[`${key}Answer`] = value || null;
-    } else if (key.startsWith("customText")) {
-      transformed[`${key}Answer`] = value || null;
-    } else if (key.startsWith("customInt")) {
-      transformed[`${key}Answer`] = value !== "" ? Number(value) : null;
-    } else if (key.startsWith("customCheckbox")) {
-      transformed[`${key}Answer`] = value === "yes";
-    }
+  formattedResponses.forEach(({ type, text }: any) => {
+    let key = "";
+    if (type === "string") key = `customString${stringCount++}Answer`;
+    else if (type === "text") key = `customText${textCount++}Answer`;
+    else if (type === "int") key = `customInt${intCount++}Answer`;
+    else if (type === "checkbox")
+      key = `customCheckbox${checkboxCount++}Answer`;
+
+    transformed[key] =
+      type === "int"
+        ? Number(text) || null
+        : type === "checkbox"
+        ? text === "yes"
+        : text || null;
   });
 
   return transformed;
@@ -78,13 +86,17 @@ const TemplateFIlling = () => {
   }, [id]);
 
   async function onSubmit(data: any) {
+    const formattedResponses = questions.map((q) => ({
+      id: q.id,
+      type: q.type,
+      text: data[q.id] || "",
+    }));
+
     const responses = {
       templateId: id,
       userId: user?.id,
-      ...transformResponses(data),
+      ...transformResponses(formattedResponses),
     };
-
-    console.log(data);
 
     try {
       await axios.post(`/response/${id}/fill`, responses);
@@ -128,19 +140,23 @@ const TemplateFIlling = () => {
                     ) : (
                       <RadioGroup
                         onValueChange={field.onChange}
-                        defaultValue={field.value || "yes"}
+                        defaultValue={field.value || "no"}
                         className="flex flex-col space-y-1">
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="yes" />
                           </FormControl>
-                          <FormLabel className="font-normal">Yes</FormLabel>
+                          <FormLabel className="font-normal">
+                            {t("yes")}
+                          </FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="no" />
                           </FormControl>
-                          <FormLabel className="font-normal">No</FormLabel>
+                          <FormLabel className="font-normal">
+                            {t("no")}
+                          </FormLabel>
                         </FormItem>
                       </RadioGroup>
                     )}
@@ -149,7 +165,7 @@ const TemplateFIlling = () => {
               )}
             />
           ))}
-          <Button type="submit">Отправить</Button>
+          <Button type="submit">{t("save")}</Button>
         </form>
       </Form>
     </div>

@@ -70,7 +70,9 @@
     "quiz": "Викторина",
     "test": "Тест",
     "another": "Другое",
-    "loading": "Загрузка"
+    "loading": "Загрузка",
+    "yes": "Да",
+    "no": "Нет"
   },
   "create_template": {
     "create_template": "Создать шаблон",

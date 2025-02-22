@@ -31,7 +31,6 @@ const Page = () => {
     async function getData() {
       try {
         const res = await axios.get("/home/get-latest");
-        console.log(res.data);
         setData(res.data);
       } catch (error) {
         console.error(error);
