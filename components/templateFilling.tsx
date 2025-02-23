@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { Question } from "./createTemplate/templateForm";
-import { transformFromApi } from "./createTemplate/editTemplate";
+import {
+  Question,
+  transformFromApi,
+  transformResponses,
+} from "@/utils/transformationData";
 import axios from "@/utils/axiosInstance";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -19,32 +22,6 @@ import { useTranslations } from "next-intl";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
-
-function transformResponses(formattedResponses: any) {
-  const transformed: any = {};
-  let stringCount = 1;
-  let textCount = 1;
-  let intCount = 1;
-  let checkboxCount = 1;
-
-  formattedResponses.forEach(({ type, text }: any) => {
-    let key = "";
-    if (type === "string") key = `customString${stringCount++}Answer`;
-    else if (type === "text") key = `customText${textCount++}Answer`;
-    else if (type === "int") key = `customInt${intCount++}Answer`;
-    else if (type === "checkbox")
-      key = `customCheckbox${checkboxCount++}Answer`;
-
-    transformed[key] =
-      type === "int"
-        ? Number(text) || null
-        : type === "checkbox"
-        ? text === "yes"
-        : text || null;
-  });
-
-  return transformed;
-}
 
 const TemplateFIlling = () => {
   const { id } = useParams();
@@ -73,7 +50,6 @@ const TemplateFIlling = () => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(`/template/${id}/questions`);
-
         setTitle(res.data.title);
         setDescription(res.data.description);
         setQuestions(transformFromApi(res.data));
@@ -113,7 +89,6 @@ const TemplateFIlling = () => {
     <div className="max-w-2xl mx-auto space-y-6 mt-8">
       <div className="border rounded p-4">
         <h2 className="text-2xl font-semibold mb-2">{title}</h2>
-
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
 

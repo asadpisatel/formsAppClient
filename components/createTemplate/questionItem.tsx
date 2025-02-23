@@ -3,7 +3,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Question } from "./templateForm";
+import { Question } from "@/utils/transformationData";
 import { GripVertical, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 

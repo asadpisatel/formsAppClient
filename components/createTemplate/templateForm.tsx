@@ -20,18 +20,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
-import { transformToApi } from "./editTemplate";
+import {
+  Question,
+  MAX_QUESTIONS_PER_TYPE,
+  transformToApi,
+} from "@/utils/transformationData";
 import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
-
-const MAX_QUESTIONS_PER_TYPE = 4;
-
-export type Question = {
-  id: string;
-  type: "string" | "text" | "int" | "checkbox";
-  text: string;
-};
 
 export function TemplateForm() {
   const [title, setTitle] = useState("");
