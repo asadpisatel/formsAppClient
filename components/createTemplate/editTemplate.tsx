@@ -53,7 +53,7 @@ export const transformFromApi = (data: any): Question[] => {
   return questions;
 };
 
-const transformToApi = (questions: Question[]) => {
+export const transformToApi = (questions: Question[]) => {
   const data: any = {};
   for (let i = 1; i <= MAX_QUESTIONS_PER_TYPE; i++) {
     data[`customString${i}State`] = false;

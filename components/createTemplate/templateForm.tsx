@@ -20,6 +20,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
+import { transformToApi } from "./editTemplate";
+import axios from "@/utils/axiosInstance";
+import { useAuthStore } from "@/store/authStore";
+import { toast } from "sonner";
 
 const MAX_QUESTIONS_PER_TYPE = 4;
 
@@ -29,16 +33,13 @@ export type Question = {
   text: string;
 };
 
-type TemplateFormProps = {
-  onSave: (data: any) => void;
-};
-
-export function TemplateForm({ onSave }: TemplateFormProps) {
+export function TemplateForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [topic, setTopic] = useState("Another");
   const [questions, setQuestions] = useState<Question[]>([]);
   const t = useTranslations("create_template");
+  const { user } = useAuthStore();
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -67,78 +68,22 @@ export function TemplateForm({ onSave }: TemplateFormProps) {
     setQuestions((prev) => prev.filter((q) => q.id !== id));
   };
 
-  const handleSubmit = () => {
-    const formattedData: any = {
-      title,
-      description,
-      topic,
-      customString1State: false,
-      customString1Question: null,
-      customString2State: false,
-      customString2Question: null,
-      customString3State: false,
-      customString3Question: null,
-      customString4State: false,
-      customString4Question: null,
-
-      customText1State: false,
-      customText1Question: null,
-      customText2State: false,
-      customText2Question: null,
-      customText3State: false,
-      customText3Question: null,
-      customText4State: false,
-      customText4Question: null,
-
-      customInt1State: false,
-      customInt1Question: null,
-      customInt2State: false,
-      customInt2Question: null,
-      customInt3State: false,
-      customInt3Question: null,
-      customInt4State: false,
-      customInt4Question: null,
-
-      customCheckbox1State: false,
-      customCheckbox1Question: null,
-      customCheckbox2State: false,
-      customCheckbox2Question: null,
-      customCheckbox3State: false,
-      customCheckbox3Question: null,
-      customCheckbox4State: false,
-      customCheckbox4Question: null,
+  async function handleSubmit() {
+    const data = {
+      title: title,
+      description: description,
+      topic: topic,
+      userId: user?.id,
+      ...transformToApi(questions),
     };
 
-    let stringIndex = 1;
-    let textIndex = 1;
-    let intIndex = 1;
-    let checkboxIndex = 1;
-
-    questions.forEach(({ type, text }) => {
-      if (type === "string" && stringIndex <= MAX_QUESTIONS_PER_TYPE) {
-        formattedData[`customString${stringIndex}State`] = true;
-        formattedData[`customString${stringIndex}Question`] = text;
-        stringIndex++;
-      } else if (type === "text" && textIndex <= MAX_QUESTIONS_PER_TYPE) {
-        formattedData[`customText${textIndex}State`] = true;
-        formattedData[`customText${textIndex}Question`] = text;
-        textIndex++;
-      } else if (type === "int" && intIndex <= MAX_QUESTIONS_PER_TYPE) {
-        formattedData[`customInt${intIndex}State`] = true;
-        formattedData[`customInt${intIndex}Question`] = text;
-        intIndex++;
-      } else if (
-        type === "checkbox" &&
-        checkboxIndex <= MAX_QUESTIONS_PER_TYPE
-      ) {
-        formattedData[`customCheckbox${checkboxIndex}State`] = true;
-        formattedData[`customCheckbox${checkboxIndex}Question`] = text;
-        checkboxIndex++;
-      }
-    });
-
-    onSave(formattedData);
-  };
+    try {
+      await axios.post("/template/create", data);
+      toast.success(t("success"));
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 mt-8">

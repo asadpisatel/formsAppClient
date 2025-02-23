@@ -90,7 +90,8 @@
     "text": "Text",
     "int": "Integer",
     "checkbox": "Checkbox",
-    "hint": "Enter your question"
+    "hint": "Enter your question",
+    "success": "Data successfully saved"
   },
   "template_filling": {
     "loading": "Loading",
