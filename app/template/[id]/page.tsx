@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "@/utils/axiosInstance";
-import { useAuthStore } from "@/store/authStore";
 import GeneralSettings from "@/components/generalSettings";
 import { EditQuestions } from "@/components/createTemplate/editTemplate";
 import TemplateFIlling from "@/components/templateFilling";
@@ -12,7 +11,6 @@ import TemplateFIlling from "@/components/templateFilling";
 const Page = () => {
   const t = useTranslations("template_page");
   const { id } = useParams();
-  const { user } = useAuthStore();
   const [isAuthor, setIsAuthor] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -28,8 +26,8 @@ const Page = () => {
       }
     }
 
-    if (user) checkTemplate();
-  }, [id, user]);
+    checkTemplate();
+  }, [id]);
 
   if (loading) return <p>{t("loading")}...</p>;
 

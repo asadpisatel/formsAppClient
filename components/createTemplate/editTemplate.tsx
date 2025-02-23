@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import axios from "@/utils/axiosInstance";
 import { useTranslations } from "next-intl";
 import { Question } from "./templateForm";
+import { toast } from "sonner";
 
 const MAX_QUESTIONS_PER_TYPE = 4;
 
@@ -142,7 +143,7 @@ export function EditQuestions() {
   const handleSave = async () => {
     try {
       await axios.put(`/template/${id}/questions`, transformToApi(questions));
-      alert("Success");
+      toast.success(t("success"));
     } catch (error) {
       console.error(error);
     }

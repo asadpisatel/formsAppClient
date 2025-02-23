@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useAuthStore } from "@/store/authStore";
+import { toast } from "sonner";
 
 function transformResponses(formattedResponses: any) {
   const transformed: any = {};
@@ -55,7 +56,7 @@ const TemplateFIlling = () => {
     defaultValues: {},
   });
   const [loading, setLoading] = useState(true);
-  const t = useTranslations("template_page");
+  const t = useTranslations("template_filling");
 
   useEffect(() => {
     if (questions.length > 0) {
@@ -100,7 +101,7 @@ const TemplateFIlling = () => {
 
     try {
       await axios.post(`/response/${id}/fill`, responses);
-      alert("Success");
+      toast.success(t("success"));
     } catch (error) {
       console.error(error);
     }

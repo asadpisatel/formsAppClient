@@ -72,7 +72,8 @@
     "another": "Another",
     "loading": "Loading",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "success": "The changes have been saved"
   },
   "create_template": {
     "create_template": "Create template",
@@ -90,5 +91,12 @@
     "int": "Integer",
     "checkbox": "Checkbox",
     "hint": "Enter your question"
+  },
+  "template_filling": {
+    "loading": "Loading",
+    "save": "Save",
+    "yes": "Yes",
+    "no": "No",
+    "success": "Data successfully saved"
   }
 }

@@ -26,6 +26,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "sonner";
 
 const topics = [
   "General",
@@ -72,7 +73,7 @@ const GeneralSettings = () => {
   const onSubmit = async (data: GeneralSettingsForm) => {
     try {
       await axios.put(`/template/${id}/general-settings`, data);
-      alert("Template saved!");
+      toast.success(t("success"));
     } catch (error) {
       console.error(error);
     }
