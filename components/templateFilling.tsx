@@ -22,6 +22,7 @@ import { useTranslations } from "next-intl";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
+import { AxiosError } from "axios";
 
 const TemplateFIlling = () => {
   const { id } = useParams();
@@ -79,7 +80,9 @@ const TemplateFIlling = () => {
       await axios.post(`/response/${id}/fill`, responses);
       toast.success(t("success"));
     } catch (error) {
-      console.error(error);
+      if ((error as AxiosError).status === 401) {
+        toast.error(t("401"));
+      }
     }
   }
 

@@ -40,7 +40,7 @@ const Page = () => {
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
       await axios.post("/user/login", values);
-      window.location.href = "/"
+      window.location.href = "/";
     } catch (error) {
       if ((error as AxiosError).status === 401) {
         form.setError("email", {
@@ -103,7 +103,9 @@ const Page = () => {
       </Form>
       <p>
         {t("text")}{" "}
-        <Link href="/registration" className="text-blue-700 underline">
+        <Link
+          href="/registration"
+          className="text-primary underline-offset-4 hover:underline">
           {t("link")}
         </Link>
       </p>

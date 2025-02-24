@@ -28,6 +28,7 @@ import {
 import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
+import { AxiosError } from "axios";
 
 export function TemplateForm() {
   const [title, setTitle] = useState("");
@@ -77,7 +78,9 @@ export function TemplateForm() {
       await axios.post("/template/create", data);
       toast.success(t("success"));
     } catch (error) {
-      console.error(error);
+      if ((error as AxiosError).status === 401) {
+        toast.error(t("401"));
+      }
     }
   }
 

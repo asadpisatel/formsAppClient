@@ -50,7 +50,8 @@
   "my_forms": {
     "templates": "Templates",
     "responses": "Responses",
-    "no_results": "No results",
+    "no_results": "No results. You need to log in",
+    "login": "Login",
     "title": "Title",
     "created_at": "Created At",
     "new": "New",
@@ -91,13 +92,15 @@
     "int": "Integer",
     "checkbox": "Checkbox",
     "hint": "Enter your question",
-    "success": "Data successfully saved"
+    "success": "Data successfully saved",
+    "401": "You're not logged in. You must be logged in to create a template."
   },
   "template_filling": {
     "loading": "Loading",
     "save": "Save",
     "yes": "Yes",
     "no": "No",
-    "success": "Data successfully saved"
+    "success": "Data successfully saved",
+    "401": "You're not logged in. You must be logged in to create a template."
   }
 }

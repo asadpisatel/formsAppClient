@@ -22,6 +22,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { FilePlus } from "lucide-react";
+import Link from "next/link";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -98,7 +99,13 @@ export function DataTable<TData, TValue>({
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center">
-                  {t("no_results")}.
+                  {t("no_results")}{" "}
+                  <Link
+                    className="text-primary underline-offset-4 hover:underline"
+                    href="/login">
+                    {t("login")}
+                  </Link>
+                  .
                 </TableCell>
               </TableRow>
             )}

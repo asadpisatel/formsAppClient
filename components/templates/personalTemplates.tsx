@@ -33,6 +33,8 @@ const PersonalTemplates = () => {
     }
     if (isAuthenticated) {
       getData();
+    } else {
+      setLoading(false);
     }
   }, [isAuthenticated, format]);
 

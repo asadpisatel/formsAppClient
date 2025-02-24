@@ -137,7 +137,9 @@ const Page = () => {
       </Form>
       <p>
         {t("text")}{" "}
-        <Link href="/login" className="text-blue-700 underline">
+        <Link
+          href="/login"
+          className="text-primary underline-offset-4 hover:underline">
           {t("link")}
         </Link>
       </p>
