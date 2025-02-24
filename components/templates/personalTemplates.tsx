@@ -14,23 +14,24 @@ const PersonalTemplates = () => {
   const t = useTranslations("my_forms");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await axios.get("/personal/templates");
-        const updatedData = response.data.map((item: Template) => {
-          return {
-            ...item,
-            createdAt: format.relativeTime(new Date(item.createdAt)),
-          };
-        });
-        setData(updatedData);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
+  async function getData() {
+    try {
+      const response = await axios.get("/personal/templates");
+      const updatedData = response.data.map((item: Template) => {
+        return {
+          ...item,
+          createdAt: format.relativeTime(new Date(item.createdAt)),
+        };
+      });
+      setData(updatedData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     if (isAuthenticated) {
       getData();
     } else {
@@ -42,7 +43,7 @@ const PersonalTemplates = () => {
 
   return (
     <div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} refreshData={getData} />
     </div>
   );
 };

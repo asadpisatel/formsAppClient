@@ -23,15 +23,18 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { FilePlus } from "lucide-react";
 import Link from "next/link";
+import DeleteTemplate from "./deleteTemplate";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  refreshData: () => Promise<void>;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { id: string }, TValue>({
   columns,
   data,
+  refreshData,
 }: DataTableProps<TData, TValue>) {
   const t = useTranslations("my_forms");
   const router = useRouter();
@@ -45,6 +48,7 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onRowSelectionChange: setRowSelection,
+    getRowId: (row) => row.id,
     state: {
       sorting,
       rowSelection,
@@ -53,10 +57,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="rounded border p-4 my-4">
+      <div className="flex gap-3 flex-wrap rounded border p-4 my-4">
         <Button onClick={() => router.push("/new-template")}>
           <FilePlus /> {t("new")}
         </Button>
+        <DeleteTemplate selectedRows={rowSelection} refreshData={refreshData} />
       </div>
       <div className="rounded border">
         <Table>
