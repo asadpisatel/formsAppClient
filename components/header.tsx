@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Input } from "./ui/input";
 import Menu from "./menu";
 import Profile from "./profile";
+import Search from "./search";
 
 const Header = () => {
   return (
@@ -13,7 +13,7 @@ const Header = () => {
         </div>
         <div className="flex items-center">
           <div className="w-full mr-4">
-            <Input placeholder="Search" />
+            <Search />
           </div>
           <div>
             <Profile />

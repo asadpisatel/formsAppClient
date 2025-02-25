@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 import axios from "@/utils/axiosInstance";
 import {
   Card,
-  CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -30,7 +30,7 @@ const Page = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const res = await axios.get("/home/get-latest");
+        const res = await axios.get("/get-latest");
         setData(res.data);
       } catch (error) {
         console.error(error);
@@ -47,7 +47,7 @@ const Page = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
       {data.map((item: Template, index) => (
-        <Card key={index}>
+        <Card key={index} className="flex flex-col justify-between">
           <CardHeader>
             <CardTitle>
               <Link
@@ -58,11 +58,11 @@ const Page = () => {
             </CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardFooter>
             <i>
               {t("author")}: {item.user.name}
             </i>
-          </CardContent>
+          </CardFooter>
         </Card>
       ))}
     </div>

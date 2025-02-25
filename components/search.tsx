@@ -1,0 +1,28 @@
+"use client";
+import React, { useState } from "react";
+import { Input } from "./ui/input";
+import { useRouter } from "next/navigation";
+
+const Search = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const router = useRouter();
+
+  function onSearch(event: React.FormEvent) {
+    event.preventDefault();
+
+    const encodedSearchValue = encodeURI(searchValue);
+    router.push(`/search?q=${encodedSearchValue}`);
+  }
+
+  return (
+    <form onSubmit={onSearch}>
+      <Input
+        placeholder="Search..."
+        value={searchValue}
+        onChange={(event) => setSearchValue(event.target.value)}
+      />
+    </form>
+  );
+};
+
+export default Search;
