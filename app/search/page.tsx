@@ -25,7 +25,8 @@ type Template = {
 };
 
 const Page = () => {
-  const t = useTranslations("menu");
+  const [loading, setLoading] = useState(true);
+  const t = useTranslations("home");
   const search = useSearchParams();
   const searchValue = search ? search.get("q") : "";
 
@@ -40,11 +41,15 @@ const Page = () => {
         setData(res.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
 
     getData();
   }, [searchValue]);
+
+  if (loading) return <p>{t("loading")}...</p>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">

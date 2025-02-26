@@ -23,7 +23,7 @@ type Template = {
 };
 
 const Page = () => {
-  const t = useTranslations("menu");
+  const t = useTranslations("home");
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 

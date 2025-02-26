@@ -2,9 +2,12 @@
   "menu": {
     "menu": "Меню",
     "home": "Главная",
-    "my_forms": "Мои формы",
+    "my_forms": "Мои формы"
+  },
+  "home": {
     "loading": "Загрузка",
-    "author": "Автор"
+    "author": "Автор",
+    "search": "Поиск"
   },
   "profile": {
     "my_account": "Мой аккаунт",

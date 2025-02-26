@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
+  const t = useTranslations("home");
 
   function onSearch(event: React.FormEvent) {
     event.preventDefault();
@@ -17,7 +19,7 @@ const Search = () => {
   return (
     <form onSubmit={onSearch}>
       <Input
-        placeholder="Search..."
+        placeholder={`${t("search")}...`}
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
       />
