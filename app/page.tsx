@@ -44,6 +44,8 @@ const Page = () => {
 
   if (loading) return <p>{t("loading")}...</p>;
 
+  if (data.length === 0) return <p>{t("no_results")}</p>;
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
       {data.map((item: Template, index) => (

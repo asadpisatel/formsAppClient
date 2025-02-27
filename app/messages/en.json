@@ -7,7 +7,8 @@
   "home": {
     "loading": "Loading",
     "author": "Author",
-    "search": "Search"
+    "search": "Search",
+    "no_results": "No results"
   },
   "profile": {
     "my_account": "My Account",
@@ -28,7 +29,8 @@
     "submit": "Submit",
     "loading": "Loading",
     "text": "Don't have an account?",
-    "link": "Sign up"
+    "link": "Sign up",
+    "success": "You have successfully logged in"
   },
   "signup": {
     "title": "Create account",
@@ -39,7 +41,8 @@
     "submit": "Submit",
     "loading": "Loading",
     "text": "Already have an account?",
-    "link": "Sign in"
+    "link": "Sign in",
+    "success": "You have successfully registered "
   },
   "admin_panel": {
     "email": "Email",
@@ -53,7 +56,7 @@
   "my_forms": {
     "templates": "Templates",
     "responses": "Responses",
-    "no_results": "No results. You need to log in",
+    "no_results": "No results.",
     "login": "Login",
     "title": "Title",
     "created_at": "Created At",
@@ -77,7 +80,8 @@
     "loading": "Loading",
     "yes": "Yes",
     "no": "No",
-    "success": "The changes have been saved"
+    "success": "The changes have been saved",
+    "401": "You are not logged in. You must be logged in to complete the template"
   },
   "create_template": {
     "create_template": "Create template",
@@ -104,6 +108,6 @@
     "yes": "Yes",
     "no": "No",
     "success": "Data successfully saved",
-    "401": "You're not logged in. You must be logged in to create a template."
+    "401": "You are not logged in. You must be logged in to complete the template"
   }
 }

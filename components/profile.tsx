@@ -50,10 +50,14 @@ const Profile = () => {
         <DropdownMenuItem asChild>
           <LocaleSWitcher />
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="p-0">
-          <Logout />
-        </DropdownMenuItem>
+        {isAuthenticated ? (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="p-0">
+              <Logout />
+            </DropdownMenuItem>
+          </>
+        ) : null}
       </DropdownMenuContent>
     </DropdownMenu>
   );

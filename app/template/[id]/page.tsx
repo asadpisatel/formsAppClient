@@ -7,6 +7,8 @@ import axios from "@/utils/axiosInstance";
 import GeneralSettings from "@/components/generalSettings";
 import { EditQuestions } from "@/components/createTemplate/editTemplate";
 import TemplateFIlling from "@/components/templateFilling";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
 
 const Page = () => {
   const t = useTranslations("template_page");
@@ -20,7 +22,9 @@ const Page = () => {
         const res = await axios.post("/template/check", { id });
         setIsAuthor(res.data.isAuthor);
       } catch (error) {
-        console.error(error);
+        if ((error as AxiosError).status === 401) {
+          toast.error(t("401"));
+        }
       } finally {
         setLoading(false);
       }

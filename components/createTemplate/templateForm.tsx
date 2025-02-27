@@ -29,14 +29,33 @@ import axios from "@/utils/axiosInstance";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+const formSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().optional(),
+  topic: z.string().default("Another"),
+});
 
 export function TemplateForm() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [topic, setTopic] = useState("Another");
   const [questions, setQuestions] = useState<Question[]>([]);
   const t = useTranslations("create_template");
   const { user } = useAuthStore();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      topic: "Another",
+    },
+  });
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -65,17 +84,13 @@ export function TemplateForm() {
     setQuestions((prev) => prev.filter((q) => q.id !== id));
   };
 
-  async function handleSubmit() {
-    const data = {
-      title: title,
-      description: description,
-      topic: topic,
-      userId: user?.id,
-      ...transformToApi(questions),
-    };
-
+  async function onSubmit(data: any) {
     try {
-      await axios.post("/template/create", data);
+      await axios.post("/template/create", {
+        ...data,
+        userId: user?.id,
+        ...transformToApi(questions),
+      });
       toast.success(t("success"));
     } catch (error) {
       if ((error as AxiosError).status === 401) {
@@ -87,17 +102,14 @@ export function TemplateForm() {
   return (
     <div className="max-w-2xl mx-auto space-y-6 mt-8">
       <h2 className="text-2xl font-semibold">{t("create_template")}</h2>
-      <Input
-        placeholder={t("title")}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <Textarea
-        placeholder={t("description")}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <Select value={topic} onValueChange={setTopic}>
+      <Input placeholder={t("title")} {...register("title")} />
+      {errors.title && (
+        <p className="text-red-500 text-sm">{errors.title.message}</p>
+      )}
+      <Textarea placeholder={t("description")} {...register("description")} />
+      <Select
+        onValueChange={(val) => setValue("topic", val)}
+        defaultValue="Another">
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
@@ -125,7 +137,7 @@ export function TemplateForm() {
         </SortableContext>
       </DndContext>
       <AddQuestion onAdd={handleAddQuestion} />
-      <Button onClick={handleSubmit}>{t("save")}</Button>
+      <Button onClick={handleSubmit(onSubmit)}>{t("save")}</Button>
     </div>
   );
 }

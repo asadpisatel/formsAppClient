@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { FilePlus } from "lucide-react";
 import Link from "next/link";
 import DeleteTemplate from "./deleteTemplate";
+import { useAuthStore } from "@/store/authStore";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +38,7 @@ export function DataTable<TData extends { id: string }, TValue>({
   refreshData,
 }: DataTableProps<TData, TValue>) {
   const t = useTranslations("my_forms");
+  const { isAuthenticated } = useAuthStore();
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -105,12 +107,13 @@ export function DataTable<TData extends { id: string }, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center">
                   {t("no_results")}{" "}
-                  <Link
-                    className="text-primary underline-offset-4 hover:underline"
-                    href="/login">
-                    {t("login")}
-                  </Link>
-                  .
+                  {!isAuthenticated ? (
+                    <Link
+                      className="text-primary underline-offset-4 hover:underline"
+                      href="/login">
+                      {t("login")}
+                    </Link>
+                  ) : null}
                 </TableCell>
               </TableRow>
             )}

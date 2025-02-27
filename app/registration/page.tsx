@@ -17,6 +17,7 @@ import Link from "next/link";
 import axios from "../../utils/axiosInstance";
 import { AxiosError } from "axios";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 const minPassLen = 2;
 
@@ -54,7 +55,10 @@ const Page = () => {
   async function onSubmit(values: z.infer<typeof schema>) {
     try {
       await axios.post("/user/registration", values);
-      window.location.href = "/";
+      toast.success(t("success"));
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
     } catch (error) {
       if ((error as AxiosError).status === 409) {
         form.setError("email", {
