@@ -4,6 +4,8 @@ import { columns, User } from "./columns";
 import { DataTable } from "./data-table";
 import axios from "../../utils/axiosInstance";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
 
 export default function Page() {
   const [data, setData] = useState<User[]>([]);
@@ -15,7 +17,13 @@ export default function Page() {
       const response = await axios.get("/admin/get_users");
       setData(response.data);
     } catch (error) {
-      console.log(error);
+      const axiosError = error as AxiosError<{ error: string }>;
+      if (
+        axiosError.response?.status === 401 ||
+        axiosError.response?.status === 403
+      ) {
+        toast.error(axiosError.response?.data.error);
+      }
     } finally {
       setLoading(false);
     }

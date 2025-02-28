@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import axios from "../utils/axiosInstance";
 import { useTranslations } from "next-intl";
+import { AxiosError } from "axios";
+import { toast } from "sonner";
 
 type ToolbarProps = {
   refreshData: () => Promise<void>;
@@ -24,10 +26,18 @@ const Toolbar = ({ refreshData, selectedRows }: ToolbarProps) => {
 
     try {
       await axios.post(`/admin/${action}`, { emails: selectedEmails });
-
-      refreshData();
+      toast.success(t(`success.${action}`));
+      setTimeout(() => {
+        refreshData();
+      }, 1000);
     } catch (error) {
-      console.log(error);
+      const axiosError = error as AxiosError<{ error: string }>;
+      if (axiosError.response?.status === 401) {
+        toast.error(axiosError.response?.data.error);
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1000);
+      }
     }
   }
   return (

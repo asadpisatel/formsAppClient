@@ -51,7 +51,14 @@
     "no_results": "No results",
     "block": "Block",
     "make_admin": "Make admin",
-    "loading": "Loading"
+    "loading": "Loading",
+    "success": {
+      "block": "Users have been successfully locked out",
+      "unblock": "Users successfully unlocked",
+      "delete": "Users have been successfully deleted",
+      "make_admin": "Users have been granted administrator rights",
+      "remove_admin": "Administrator privileges have been removed"
+    }
   },
   "my_forms": {
     "templates": "Templates",
